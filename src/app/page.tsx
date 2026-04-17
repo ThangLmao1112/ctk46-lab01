@@ -1,4 +1,7 @@
 import Link from "next/link";	
+import Counter from "@/components/counter";
+import ThemeToggle from "@/components/theme-toggle";
+import CopyButton from "@/components/copy-button";
 	
 export default function HomePage() {	
   return (	
@@ -71,6 +74,16 @@ export default function HomePage() {
           Xem blog →	
         </Link>	
       </div>	
+
+      {/* Interactive components */}
+      <div className="mt-16 rounded-2xl border p-6 dark:border-gray-700 dark:bg-gray-800">
+        <h2 className="mb-6 text-center text-2xl font-bold">Tương tác nhanh</h2>
+        <div className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:flex-wrap">
+          <Counter />
+          <ThemeToggle />
+          <CopyButton textToCopy="2212458@dlu.edu.vn" />
+        </div>
+      </div>
     </div>	
   );	
 }	
