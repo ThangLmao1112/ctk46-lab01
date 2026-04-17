@@ -28,7 +28,7 @@ export default function GlobalError({
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <button
               onClick={() => reset()}
-              className="rounded-lg bg-blue-600 px-6 py-2 text-white transition-colors hover:bg-blue-700"
+              className="rounded-lg bg-emerald-600 px-6 py-2 text-white transition-colors hover:bg-emerald-700"
             >
               Thử lại
             </button>
