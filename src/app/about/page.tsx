@@ -5,7 +5,7 @@ export default function AboutPage() {
 	
       <div className="space-y-4 text-gray-700">	
         <p>	
-          Xin chào! Tôi là <strong>Nguyễn Văn A</strong>, sinh viên năm 4	
+          Xin chào! Tôi là <strong>Nguyễn Hoàng Quốc Thắng</strong>, sinh viên năm 4	
           ngành Công nghệ Thông tin tại Đại học Đà Lạt.	
         </p>	
 	
