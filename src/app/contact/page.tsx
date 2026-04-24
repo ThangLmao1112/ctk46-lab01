@@ -1,8 +1,12 @@
 "use client";
 
 import { useActionState, useEffect, useState } from "react";
-import FormSubmitButton from "@/components/form-submit-button";
 import { sendContactMessage, type ContactFormState } from "./actions";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 const initialState: ContactFormState = {
   success: false,
@@ -55,95 +59,53 @@ export default function ContactPage() {
 
         <div className="md:col-span-2">
           {showSuccess ? (
-            <div className="rounded-lg border border-green-200 bg-green-50 p-6 text-center">
-              <h3 className="mb-2 text-lg font-semibold text-green-700">Gửi thành công!</h3>
-              <p className="text-green-600">Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm nhất có thể.</p>
-              <button
-                type="button"
-                onClick={() => setShowSuccess(false)}
-                className="mt-4 rounded-lg bg-blue-600 px-6 py-2 text-white transition-colors hover:bg-blue-700"
-              >
-                Gửi tin nhắn khác
-              </button>
-            </div>
+            <Card className="border-green-200 bg-green-50">
+              <CardHeader>
+                <CardTitle className="text-center text-green-700">Gửi thành công!</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 text-center">
+                <p className="text-green-600">Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm nhất có thể.</p>
+                <Button type="button" onClick={() => setShowSuccess(false)}>
+                  Gửi tin nhắn khác
+                </Button>
+              </CardContent>
+            </Card>
           ) : (
-            <form action={formAction} className="space-y-4 rounded-lg bg-gray-50 p-6 dark:bg-gray-800">
-              <div>
-                <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Họ và tên
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Nguyễn Văn A"
-                  required
-                  className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {state.errors?.name && (
-                  <p className="mt-1 text-sm text-red-500">{state.errors.name[0]}</p>
-                )}
-              </div>
+            <Card className="bg-gray-50 dark:bg-gray-800">
+              <CardContent className="p-6">
+                <form action={formAction} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Họ và tên</Label>
+                    <Input id="name" name="name" type="text" placeholder="Nguyễn Văn A" required />
+                    {state.errors?.name && <p className="text-sm text-red-500">{state.errors.name[0]}</p>}
+                  </div>
 
-              <div>
-                <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="email@example.com"
-                  required
-                  className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {state.errors?.email && (
-                  <p className="mt-1 text-sm text-red-500">{state.errors.email[0]}</p>
-                )}
-              </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" name="email" type="email" placeholder="email@example.com" required />
+                    {state.errors?.email && <p className="text-sm text-red-500">{state.errors.email[0]}</p>}
+                  </div>
 
-              <div>
-                <label htmlFor="subject" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Tiêu đề
-                </label>
-                <input
-                  id="subject"
-                  name="subject"
-                  type="text"
-                  placeholder="Chủ đề bạn muốn trao đổi"
-                  required
-                  className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {state.errors?.subject && (
-                  <p className="mt-1 text-sm text-red-500">{state.errors.subject[0]}</p>
-                )}
-              </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Tiêu đề</Label>
+                    <Input id="subject" name="subject" type="text" placeholder="Chủ đề bạn muốn trao đổi" required />
+                    {state.errors?.subject && <p className="text-sm text-red-500">{state.errors.subject[0]}</p>}
+                  </div>
 
-              <div>
-                <label htmlFor="message" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Nội dung
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Viết nội dung tin nhắn..."
-                  required
-                  rows={5}
-                  className="w-full resize-none rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {state.errors?.message && (
-                  <p className="mt-1 text-sm text-red-500">{state.errors.message[0]}</p>
-                )}
-              </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Nội dung</Label>
+                    <Textarea id="message" name="message" placeholder="Viết nội dung tin nhắn..." required rows={5} />
+                    {state.errors?.message && <p className="text-sm text-red-500">{state.errors.message[0]}</p>}
+                  </div>
 
-              <FormSubmitButton
-                idleText="Gửi tin nhắn"
-                pendingText="Đang gửi..."
-                className="w-full rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
-              />
+                  <Button type="submit" disabled={isPending} className="w-full">
+                    {isPending ? "Đang gửi..." : "Gửi tin nhắn"}
+                  </Button>
 
-              {isPending && <p className="text-sm text-gray-500">Đang gửi tin nhắn...</p>}
-            </form>
+                  {isPending && <p className="text-sm text-gray-500">Đang gửi tin nhắn...</p>}
+                </form>
+              </CardContent>
+            </Card>
           )}
         </div>
       </div>

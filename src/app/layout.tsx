@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {	
   return (	
     <html lang="vi" suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+      <body className="min-h-screen flex flex-col bg-background text-foreground">
         <Navbar />	
         <main className="flex-1">{children}</main>	
         <Footer />	

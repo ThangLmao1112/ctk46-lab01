@@ -1,8 +1,20 @@
 import { guestbookEntries } from "@/data/guestbook";
 import GuestbookForm from "@/components/guestbook-form";
 import DeleteButton from "@/components/delete-button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export const dynamic = "force-dynamic";
+
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("");
+}
 
 export default function GuestbookPage() {
   const entries = guestbookEntries;
@@ -14,6 +26,8 @@ export default function GuestbookPage() {
 
       <GuestbookForm />
 
+      <Separator className="my-8" />
+
       <div className="space-y-4">
         <p className="text-sm text-gray-400">{entries.length} lời nhắn</p>
 
@@ -22,18 +36,25 @@ export default function GuestbookPage() {
         )}
 
         {entries.map((entry) => (
-          <article key={entry.id} className="rounded-lg border p-4 transition-shadow hover:shadow-sm">
-            <div className="mb-2 flex items-center justify-between gap-3">
-              <span className="font-semibold text-gray-800">{entry.name}</span>
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-gray-400">
-                  {new Date(entry.createdAt).toLocaleDateString("vi-VN")}
-                </span>
+          <Card key={entry.id}>
+            <CardContent className="pt-4">
+              <div className="mb-2 flex items-start justify-between gap-4">
+                <div className="flex items-start gap-3">
+                  <Avatar className="h-10 w-10">
+                    <AvatarFallback>{getInitials(entry.name)}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="font-semibold text-card-foreground">{entry.name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {new Date(entry.createdAt).toLocaleDateString("vi-VN")}
+                    </p>
+                  </div>
+                </div>
                 <DeleteButton id={entry.id} />
               </div>
-            </div>
-            <p className="text-gray-600">{entry.message}</p>
-          </article>
+              <p className="text-gray-600">{entry.message}</p>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>
