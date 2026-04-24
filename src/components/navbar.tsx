@@ -8,6 +8,7 @@ const navItems = [
   { href: "/projects", label: "Dự án" },
   { href: "/about", label: "Giới thiệu" },
   { href: "/blog", label: "Blog" },
+  { href: "/guestbook", label: "Lưu bút" },
   { href: "/contact", label: "Liên hệ" },
   { href: "/skills", label: "Kỹ năng" },
 ];
