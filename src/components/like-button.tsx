@@ -26,7 +26,7 @@ colors ${
       }`}	
     >	
       <span>{liked ? "❤" : "🤍"}</span>	
-      <span>{count} lượt thích</span>	
+      <span>{count} Lượt thích </span>	
     </button>
     );	
 }
